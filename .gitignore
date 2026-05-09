@@ -2,7 +2,14 @@
 .vscode/
 .idea/
 *.swp
-*.swo
+*.swogit 
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
 
 # OS files
 .DS_Store
@@ -19,3 +26,4 @@ yarn-error.log*
 .gemini/
 .agent/
 docs/PLAN.md
+
