@@ -1,0 +1,292 @@
+/* ==========================================================================
+   Base compartihada para todos os templates no A4
+   ========================================================================== */
+.resume-page {
+    box-sizing: border-box;
+    /* Removendo margin e padronizando box-sizing dentro do A4 */
+}
+
+.resume-page * {
+    box-sizing: border-box;
+    line-height: 1.5;
+}
+
+/* Helper para esconder blocos vazios no preview */
+.empty-section {
+    display: none !important;
+}
+
+
+/* ==========================================================================
+   TEMPLATE: MODERNO (Duas colunas, Sidebar Colorida, Fonte Sans-serif)
+   ========================================================================== */
+.template-moderno {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: row; 
+    background: #fff;
+}
+
+/* Sidebar Esquerda */
+.template-moderno .resume-sidebar {
+    width: 30%;
+    /* background-color: #2b3a4a; injetado no JS */
+    color: #fff;
+    padding: 50px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+
+.template-moderno .profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    margin: 0 auto;
+}
+
+.template-moderno .contact-info {
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.template-moderno .contact-label-sidebar {
+    margin-bottom: 15px;
+    color: #8fa5ba;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.template-moderno .contact-item {
+    display: flex;
+    flex-direction: column;
+}
+.template-moderno .contact-label {
+    font-weight: 700;
+    color: #8fa5ba;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.template-moderno .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.template-moderno .skill-badge {
+    background: rgba(255,255,255,0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+/* Corpo Principal (Direita) */
+.template-moderno .resume-main {
+    width: 70%;
+    padding: 50px; /* Margem segura igualada em todos os lados */
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.template-moderno .resume-header-main {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.template-moderno .resume-name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2b3a4a;
+    line-height: 1.1;
+    margin-bottom: 0px;
+}
+
+.template-moderno .resume-role {
+    font-size: 1.2rem;
+    color: #4F46E5; /* Cor destaque */
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.template-moderno .resume-summary {
+    font-size: 0.95rem;
+    color: #555;
+    text-align: justify;
+}
+
+.template-moderno .section-title {
+    font-size: 1.3rem;
+    color: #2b3a4a;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.template-moderno .item-block {
+    margin-bottom: 15px;
+}
+.template-moderno .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 3px;
+}
+.template-moderno .item-title {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #2b3a4a;
+}
+.template-moderno .item-date {
+    font-size: 0.85rem;
+    color: #718096;
+    font-weight: 600;
+}
+.template-moderno .item-subtitle {
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+}
+.template-moderno .item-desc {
+    font-size: 0.9rem;
+    color: #4a5568;
+}
+
+/* ==========================================================================
+   TEMPLATE: CLASSICO (Coluna única, P/B, Serifado)
+   ========================================================================== */
+.template-classico {
+    font-family: 'Merriweather', serif;
+    color: #1a1a1a;
+    padding: 60px 80px; /* Aumentado de 50px 60px para criar mais respiro */
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.template-classico .resume-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 20px;
+}
+
+.template-classico .profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 15px auto;
+    display: block;
+}
+
+.template-classico .resume-name {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.template-classico .contact-info {
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif; /* Dados de contato em sans-serif pra clareza */
+    color: #444;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.template-classico .contact-item {
+    display: inline-flex;
+}
+.template-classico .contact-label {
+    display: none; /* Não exibe labels no clássico, fica "joao@email.com | (11) 99..." */
+}
+
+.template-classico .resume-summary {
+    font-size: 1rem;
+    text-align: justify;
+    margin-bottom: 25px;
+}
+
+.template-classico .section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+    color: #000;
+}
+
+.template-classico .resume-section {
+    margin-bottom: 25px;
+}
+
+.template-classico .item-block {
+    margin-bottom: 15px;
+}
+
+.template-classico .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.template-classico .item-title {
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.template-classico .item-subtitle {
+    font-style: italic;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.template-classico .item-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.template-classico .item-desc {
+    font-size: 0.95rem;
+    margin-top: 5px;
+}
+
+.template-classico .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.template-classico .skill-badge {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.template-classico .skill-badge::after {
+    content: "•";
+    margin-left: 10px;
+    color: #999;
+}
+.template-classico .skill-badge:last-child::after {
+    display: none;
+}

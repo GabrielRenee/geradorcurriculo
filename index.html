@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Currículo PDF Pro</title>
+    
+    <!-- Fontes do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/templates.css">
+    
+    <!-- CDNs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- Painel Esquerdo: Formulário -->
+        <aside class="form-panel">
+            <header class="form-header">
+                <h1>Gerador de Currículo</h1>
+                <div class="header-actions">
+                    <button id="btn-clear-data" class="btn-outline" title="Limpar dados salvos">Limpar</button>
+                    <button id="btn-generate-pdf" class="btn-primary">Gerar PDF</button>
+                </div>
+            </header>
+
+            <form id="resume-form" novalidate>
+                
+                <!-- Controles Globais -->
+                <section class="form-section settings-section">
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="template-select">Estilo do Currículo</label>
+                            <select id="template-select">
+                                <option value="moderno">Moderno (Sidebar Colorida)</option>
+                                <option value="classico">Clássico (Serifado P/B)</option>
+                            </select>
+                        </div>
+                        <div class="input-group" id="color-picker-group">
+                            <label for="input-color">Cor da Sidebar</label>
+                            <input type="color" id="input-color" style="height: 38px; padding: 2px; width: 100%; cursor: pointer;">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dados Pessoais -->
+                <section class="form-section">
+                    <h2>1. Dados Pessoais</h2>
+                    <div class="photo-upload-group">
+                        <label for="photo-upload" class="photo-upload-label">
+                            <span id="photo-preview-text">📸 Adicionar Foto</span>
+                            <img id="photo-preview-img" src="" alt="Preview da Foto" style="display:none;">
+                            <input type="file" id="photo-upload" accept="image/jpeg, image/png, image/webp" hidden>
+                        </label>
+                        <button type="button" id="btn-remove-photo" class="btn-text" style="display:none;">Remover Foto</button>
+                    </div>
+
+                    <div class="input-grid">
+                        <div class="input-group full-width">
+                            <label for="input-name">Nome Completo *</label>
+                            <input type="text" id="input-name" required placeholder="Ex: João da Silva">
+                            <span class="error-msg">Nome é obrigatório</span>
+                        </div>
+                        <div class="input-group">
+                            <label for="input-email">Email *</label>
+                            <input type="email" id="input-email" required placeholder="joao@email.com">
+                            <span class="error-msg">Email inválido</span>
+                        </div>
+                        <div class="input-group">
+                            <label for="input-phone">Telefone *</label>
+                            <input type="tel" id="input-phone" required placeholder="(11) 99999-9999">
+                            <span class="error-msg">Telefone é obrigatório</span>
+                        </div>
+                        <div class="input-group">
+                            <label for="input-location">Cidade / Estado *</label>
+                            <input type="text" id="input-location" required placeholder="São Paulo, SP">
+                            <span class="error-msg">Localização obrigatória</span>
+                        </div>
+                        <div class="input-group">
+                            <label for="input-linkedin">LinkedIn / Portfólio</label>
+                            <input type="url" id="input-linkedin" placeholder="https://linkedin.com/in/...">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Objetivo Profissional -->
+                <section class="form-section">
+                    <h2>2. Objetivo / Resumo Profissional</h2>
+                    <div class="input-group">
+                        <textarea id="input-summary" rows="4" required placeholder="Descreva brevemente seu perfil, experiências principais e objetivos de carreira..."></textarea>
+                        <span class="error-msg">Resumo é obrigatório</span>
+                    </div>
+                </section>
+
+                <!-- Formação Acadêmica -->
+                <section class="form-section">
+                    <h2>3. Formação Acadêmica</h2>
+                    <div id="education-container"></div>
+                    <button type="button" id="btn-add-education" class="btn-secondary">+ Adicionar Formação</button>
+                </section>
+
+                <!-- Experiência Profissional -->
+                <section class="form-section">
+                    <h2>4. Experiência Profissional</h2>
+                    <div id="experience-container"></div>
+                    <button type="button" id="btn-add-experience" class="btn-secondary">+ Adicionar Experiência</button>
+                </section>
+
+                <!-- Habilidades -->
+                <section class="form-section">
+                    <h2>5. Habilidades Técnicas</h2>
+                    <div class="input-group">
+                        <label for="input-skill">Adicionar Habilidade</label>
+                        <div class="skill-input-wrapper">
+                            <input type="text" id="input-skill" placeholder="Ex: JavaScript, Gestão de Equipes...">
+                            <button type="button" id="btn-add-skill" class="btn-secondary">Adicionar</button>
+                        </div>
+                        <div id="skills-container" class="skills-tags"></div>
+                    </div>
+                </section>
+            </form>
+        </aside>
+
+        <!-- Painel Direito: Live Preview -->
+        <main class="preview-panel">
+            <div class="preview-controls">
+                <span>Live Preview (A4)</span>
+                <div class="zoom-controls">
+                    <button id="btn-zoom-out" title="Diminuir">-</button>
+                    <span id="zoom-level">100%</span>
+                    <button id="btn-zoom-in" title="Aumentar">+</button>
+                </div>
+            </div>
+            
+            <div class="resume-wrapper">
+                <!-- O PDF será gerado a partir desta div -->
+                <div id="resume-preview" class="resume-page template-modern">
+                    <!-- O conteúdo será injetado pelo JavaScript -->
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Templates HTML Ocultos para clonagem (Forms) -->
+    <template id="tpl-education-form">
+        <div class="dynamic-card" data-id="">
+            <div class="card-header">
+                <h3>Nova Formação</h3>
+                <button type="button" class="btn-icon btn-remove-card" title="Remover">&times;</button>
+            </div>
+            <div class="input-grid">
+                <div class="input-group full-width">
+                    <label>Curso / Grau *</label>
+                    <input type="text" class="edu-course" required placeholder="Ex: Bacharelado em Ciência da Computação">
+                </div>
+                <div class="input-group full-width">
+                    <label>Instituição *</label>
+                    <input type="text" class="edu-institution" required placeholder="Ex: Universidade de São Paulo">
+                </div>
+                <div class="input-group">
+                    <label>Ano Início</label>
+                    <input type="text" class="edu-start" placeholder="Ex: 2018">
+                </div>
+                <div class="input-group">
+                    <label>Ano Término</label>
+                    <input type="text" class="edu-end" placeholder="Ex: 2022 ou Cursando">
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-experience-form">
+        <div class="dynamic-card" data-id="">
+            <div class="card-header">
+                <h3>Nova Experiência</h3>
+                <button type="button" class="btn-icon btn-remove-card" title="Remover">&times;</button>
+            </div>
+            <div class="input-grid">
+                <div class="input-group full-width">
+                    <label>Cargo *</label>
+                    <input type="text" class="exp-role" required placeholder="Ex: Desenvolvedor Front-end Senior">
+                </div>
+                <div class="input-group full-width">
+                    <label>Empresa *</label>
+                    <input type="text" class="exp-company" required placeholder="Ex: Tech Corp">
+                </div>
+                <div class="input-group">
+                    <label>Período</label>
+                    <input type="text" class="exp-period" placeholder="Ex: Jan 2020 - Atual">
+                </div>
+                <div class="input-group full-width">
+                    <label>Descrição das Atividades</label>
+                    <textarea class="exp-description" rows="3" placeholder="Principais conquistas e responsabilidades..."></textarea>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
