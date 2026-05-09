@@ -2,8 +2,6 @@
 
 Um gerador de currículos profissional, rápido e elegante, construído inteiramente com **HTML5, CSS3 e JavaScript puro (Vanilla JS)**. Ideal para quem busca uma ferramenta simples e poderosa para criar currículos em PDF sem a necessidade de frameworks pesados.
 
-![Preview do Projeto](https://raw.githubusercontent.com/sua-conta/seu-repo/main/preview.png) *(Substitua por uma imagem do seu projeto)*
-
 ## 🚀 Funcionalidades
 
 - **Live Preview (A4):** Visualize as alterações no seu currículo em tempo real enquanto preenche os dados.
@@ -41,4 +39,4 @@ Um gerador de currículos profissional, rápido e elegante, construído inteiram
 - **Validação Nativa:** Uso de HTML5 Validation API para garantir que campos obrigatórios e formatos (e-mail, links) estejam corretos.
 
 ---
-Desenvolvido por [Seu Nome] - [Seu LinkedIn](https://linkedin.com/in/seulinkedin)
+Desenvolvido por Gabriel Renée da Silva - [LinkedIn](https://linkedin.com/in/gabrielrenee)
